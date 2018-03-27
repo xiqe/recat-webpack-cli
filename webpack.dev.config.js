@@ -2,6 +2,8 @@ const path = require('path');
 
 module.exports = {
 
+    devtool: 'inline-source-map',
+
     /*入口*/
     entry: [
         'react-hot-loader/patch',
