@@ -1,7 +1,25 @@
-import React from 'react'
-import { render } from 'react-dom'
+import React from 'react';
+import { render } from 'react-dom';
+import {AppContainer} from 'react-hot-loader';
 
-render(
-    <h1>Hello, world!</h1>,
-    document.getElementById('app')
-);
+import getRouter from 'router/router';
+
+/*初始化*/
+renderWithHotReload(getRouter());
+
+/*热更新*/
+if (module.hot) {
+    module.hot.accept('./router/router', () => {
+        const getRouter = require('./router/router').default;
+        renderWithHotReload(getRouter());
+    });
+}
+
+function renderWithHotReload(RootElement) {
+    render(
+        <AppContainer>
+            {RootElement}
+        </AppContainer>,
+        document.getElementById('app')
+    )
+}
